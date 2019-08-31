@@ -25,7 +25,7 @@ minetest.register_node("caves_shop:shop", {
 
 shop = {}
 shop.formspec1 = "size[8,9]"..
-                "label[3.5,0;Vending machine]"..
+                "label[2.5,0;Vending machine]"..
                 "image_button[1,1;1,1;type_6.png;type_6;]"..
                 "label[2,1.25;Type 6, cost - 400 gold money]"..
                 "image_button[1,2;1,1;plasma_charge.png;plasma_charge;]"..
@@ -36,7 +36,7 @@ shop.formspec1 = "size[8,9]"..
                 "button[7,4;1,1;to_2;>>>]"
 
 shop.formspec2 = "size[8,9]"..
-                "label[3.5,0;Vending machine]"..
+                "label[2.5,0;Vending machine]"..
                 "image_button[1,1;1,1;arrow.png;arrow;]"..
                 "label[2,1.25;Arrow, cost - 6 gold money for 5 arrows]"..
                 "image_button[1,2;1,1;pistol_bullet.png;pistol_bullet;]"..
@@ -48,7 +48,7 @@ shop.formspec2 = "size[8,9]"..
                 "button[7,4;1,1;to_3;>>>]"
 
 shop.formspec3 = "size[8,9]"..
-                "label[3.5,0;Vending machine]"..
+                "label[2.5,0;Vending machine]"..
                 "image_button[1,1;1,1;default_tool_steelpick.png;steel_pick;]"..
                 "label[2,1.25;Steel pickaxe, cost - 60 gold money]"..
                 "image_button[1,2;1,1;mace_normal.png;mace;]"..
@@ -60,7 +60,7 @@ shop.formspec3 = "size[8,9]"..
                 "button[7,4;1,1;to_4;>>>]"
 
 shop.formspec4 = "size[8,9]"..
-                "label[3.5,0;Vending machine]"..
+                "label[2.5,0;Vending machine]"..
                 "image_button[1,1;1,1;default_steel_ingot.png;steel_ingot;]"..
                 "label[2,1.25;Steel ingot, cost - 18 gold money]"..
                 "image_button[1,2;1,1;default_diamond.png;diamond;]"..
