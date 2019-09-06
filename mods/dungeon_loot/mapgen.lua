@@ -146,6 +146,7 @@ minetest.register_on_generated(function(minp, maxp, blockseed)
 	local num_chests = rand:next(dungeon_loot.CHESTS_MIN, dungeon_loot.CHESTS_MAX)
 	num_chests = math.min(#candidates, num_chests)
 	local rooms = random_sample(rand, candidates, num_chests)
+	local vending_machine_placed = false
 
 	for _, room in ipairs(rooms) do
 		-- choose place somewhere in front of any of the walls
@@ -159,12 +160,18 @@ minetest.register_on_generated(function(minp, maxp, blockseed)
 		local chestpos = vector.add(wall.pos, wall.facing)
 		local off = rand:next(-room.size[vi]/2 + 1, room.size[vi]/2 - 1)
 		chestpos = vector.add(chestpos, vector.multiply(v, off))
-
 		if minetest.get_node(chestpos).name == "air" then
 			-- make it face inwards to the room
+			local to_place = "default:chest"
+			if math.random(1,2) == 2  and not vending_machine_placed then 
+				to_place = "caves_shop:shop" 
+				vending_machine_placed = true
+			end --place vending machine
 			local facedir = minetest.dir_to_facedir(vector.multiply(wall.facing, -1))
-			minetest.add_node(chestpos, {name = "default:chest", param2 = facedir})
+			minetest.add_node(chestpos, {name = to_place, param2 = facedir})
+			if to_place ~= "caves_shop:shop" then
 			populate_chest(chestpos, PcgRandom(noise3d_integer(noise, chestpos)), room.type)
+			end
 		end
 	end
 end)
