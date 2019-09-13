@@ -43,7 +43,7 @@ minetest.register_globalstep(function(dtime, player)
 		local inv = player:get_inventory()
 		local controls = player:get_player_control()
 		if player:get_wielded_item():get_name() == "caves_range:type_6" 
-		and inv:contains_item("main", "caves_range:plasma_charge")then
+		and inv:contains_item("main", "caves_range:plasma_charge") then
 		if controls.RMB then
 		inv:remove_item("main", "caves_range:plasma_charge")
 		player:set_wielded_item("caves_range:type_6_charging")

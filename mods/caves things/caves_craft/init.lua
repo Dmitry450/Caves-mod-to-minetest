@@ -100,3 +100,125 @@ minetest.register_craft({
 		 {"", "default:steel_ingot", ""}
          },
 })
+
+local modpath = minetest.get_modpath(minetest.get_current_modname())
+dofile(modpath.."/api.lua")
+
+minetest.register_node("caves_craft:util", {
+    description = "Utiliser",
+    tiles = {
+		"util.png", "util.png",
+		"util.png", "util.png",
+		"util.png", "util_front.png"
+    },
+    on_rightclick = function(pos, node, clicker)
+        minetest.show_formspec(clicker:get_player_name(), "caves_craft:utilformspec", util.formspec)
+    end,
+    light_source = 4,
+    groups = {cracky = 3, stone = 4},
+	sounds = default.node_sound_metal_defaults(),
+	on_construct = function(pos)
+		local meta = minetest.get_meta(pos)
+		meta:set_string("formspec", util.formspec)
+		local inv = meta:get_inventory()
+		inv:set_size('in', 1)
+		inv:set_size('out', 9)
+		minetest.get_node_timer(pos):start(1)
+	end,
+	on_timer = function(pos, elapsed)
+		local meta = minetest.get_meta(pos)
+		local inv = meta:get_inventory()
+		if not inv:is_empty("in") then
+			util.craft(inv)
+		end
+		minetest.get_node_timer(pos):start(1)
+	end,
+	can_dig = function(pos,player)
+		local meta = minetest.get_meta(pos);
+		local inv = meta:get_inventory()
+		return inv:is_empty("in") and inv:is_empty("in")
+	end,
+})
+
+util.register_craft({
+	input = "caves_range:arrow_gun_loaded0",
+	output = {"caves_craft:simple_element 8"},
+})
+
+util.register_craft({
+	input = "caves_resources:drill_normal",
+	output = {"caves_craft:simple_element 8"},
+})
+
+util.register_craft({
+	input = "caves_resources:drill_poweruped",
+	output = {"caves_craft:simple_element 8",
+			  "caves_craft:electro_element 2"},
+})
+
+util.register_craft({
+	input = "caves_resources:drill_diamond",
+	output = {"caves_craft:simple_element 8",
+			  "caves_craft:electro_element 2",
+			  "default:diamond"},
+})
+
+util.register_craft({
+	input = "default:pick_wood",
+	output = {"default:stick 2"},
+})
+
+util.register_craft({
+	input = "default:pick_stone",
+	output = {"default:stick 2",
+			  "default:stone"},
+})
+
+util.register_craft({
+	input = "default:pick_steel",
+	output = {"default:stick 2",
+			  "default:steel_ingot"},
+})
+
+util.register_craft({
+	input = "default:pick_bronze",
+	output = {"default:stick 2",
+			  "default:bronze_ingot"},
+})
+
+util.register_craft({
+	input = "default:pick_mese",
+	output = {"default:stick 2",
+			  "default:mese_crystal_fragment"},
+})
+
+util.register_craft({
+	input = "default:pick_diamond",
+	output = {"default:stick 2",
+			  "default:diamond"},
+})
+
+util.register_craft({
+	input = "default:shovel_wood",
+	output = {"default:stick 2"},
+})
+
+util.register_craft({
+	input = "default:shovel_stone",
+	output = {"default:stick 2"},
+})
+
+util.register_craft({
+	input = "default:shovel_bronze",
+	output = {"default:stick 2"},
+})
+
+util.register_craft({
+	input = "default:shovel_steel",
+	output = {"default:stick 2"},
+})
+
+util.register_craft({
+	input = "default:shovel_mese",
+	output = {"default:stick 2"},
+})

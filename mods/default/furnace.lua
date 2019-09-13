@@ -117,7 +117,7 @@ local function furnace_node_timer(pos, elapsed)
 
 		srclist = inv:get_list("src")
 		fuellist = inv:get_list("fuel")
-
+		
 		--
 		-- Cooking
 		--
