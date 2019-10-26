@@ -19,8 +19,32 @@ minetest.register_node("caves_shop:shop", {
         minetest.show_formspec(clicker:get_player_name(), "caves_shop:shopformspec", shop.formspec1)
     end,
     light_source = 4,
-    groups = {cracky = 3, stone = 4},
+    groups = {cracky = 3},
     sounds = default.node_sound_metal_defaults(),
+})
+
+minetest.register_node("caves_shop:shop_not_active", {
+    description = "Vending machine (not active)",
+    tiles = {
+		"shop_top.png", "shop_top.png",
+		"shop_side.png", "shop_side.png",
+		"shop_side.png", "shop_side.png"
+    },
+    groups = {cracky = 3},
+    sounds = default.node_sound_metal_defaults(),
+    after_place_node = function(pos, placer)
+        local meta = minetest.get_meta(pos)
+        meta:set_string("infotext", "Not active.\nUse teleport module to activate.")
+    end
+})
+
+minetest.register_craft({
+	output = "caves_shop:shop_not_active",
+	recipe = {
+		 {"default:copper_ingot", "default:steel_ingot", "default:copper_ingot"},
+		 {"default:steel_ingot", "default:diamond", "default:steel_ingot"},
+		 {"default:copper_ingot", "default:steel_ingot", "default:copper_ingot"}
+         },
 })
 
 shop = {}

@@ -19,6 +19,13 @@ util.formspec = "size[8,9]"..
 				"list[current_player;main;0,5.5;8,3;8]"
 
 util.register_craft = function(def)
+	--[[
+		usage: 
+		util.register_craft({
+			input = <string>,
+			output = <list-like table>,
+		})
+	--]]
 	if def.input and def.output then
 		table.insert(util.registered_crafts, def)
 	else
@@ -26,16 +33,17 @@ util.register_craft = function(def)
 	end
 end
 
-util.craft = function(inv)
+util.craft = function(inv, pos)
 	local stack = split(inv:get_list("in", 0)[1]:to_string())
 	local item = stack[1]
 	for _, craft in pairs(util.registered_crafts) do
 		if craft.input == item then
 			inv:remove_item("in", item.." 1")
 			for _, o in pairs(craft.output) do 
-				inv:add_item("out", o)
+				local leftover = inv:add_item("out", o)
+				if leftower then minetest.add_item({x=pos.x, y=pos.y+1, z=pos.z}, leftover) end
 			end
-			return nil
+			return true
 		end
 	end
 end
